@@ -60,6 +60,12 @@ public:
 			init_head = init_head->next;
 			delete temp;
 			temp = nullptr;
+			if (size == 1) {
+				init_tail = nullptr;
+			}
+			else {
+				init_head->previous = nullptr;
+			}
 
 			std::cout << "success" << std::endl;
 			size--;
@@ -75,6 +81,13 @@ public:
 			init_tail = init_tail->previous;
 			delete temp;
 			temp = nullptr;
+
+			if (size == 1) {
+				init_head = nullptr;
+			}
+			else {
+				init_tail->next = nullptr;
+			}
 
 			std::cout << "success" << std::endl;
 			size--;
@@ -113,15 +126,12 @@ public:
 	}
 
 	void clear() {
-		Linkedlist* temp;
+		init_tail = nullptr;
 		while (init_head != nullptr) {
-			temp = init_head;
+			Linkedlist* temp = init_head;
 			init_head = init_head->next;
 			delete temp;
-			temp = nullptr;
 		}
-
-		init_tail = nullptr;
 
 		size = 0;
 
@@ -137,18 +147,13 @@ public:
 				j++;
 			}
 			if (j == temp->URL_name.length() && j == url_name.length()) {
-				check = true;
-				break;
+				std::cout << "found " << temp->URL_name << " " << temp->URL << std::endl;
+				return;
 			}
 			temp = temp->next;
 		}
 
-		if (check) {
-			std::cout << "found " << temp->URL_name << " " << temp->URL << std::endl;
-		}
-		else {
-			std::cout << "not found " << url_name << std::endl;
-		}
+		std::cout << "not found " << url_name << std::endl;
 
 		temp = nullptr;
 	}
@@ -164,14 +169,11 @@ public:
 	}
 
 	~Deque() {
-		Linkedlist* temp;
+		init_tail = nullptr;
 		while (init_head != nullptr) {
-			temp = init_head;
+			Linkedlist* temp = init_head;
 			init_head = init_head->next;
 			delete temp;
-			temp = nullptr;
 		}
-
-		init_tail = nullptr;
 	}
 };
