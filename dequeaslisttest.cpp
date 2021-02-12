@@ -12,7 +12,7 @@ int main()
 
         std::getline(std::cin, line);
 
-        if (line == "exit\n") {
+        if (line == "exit") {
             break;
         }
 
@@ -21,18 +21,18 @@ int main()
         std::string content = line.substr(divider + 1);
 
         if (command == "push_front") {
-            int divider2 = content.find(" ");
-            std::string url_name = content.substr(1, divider2 - 2);
+            int divider2 = content.find("\"", 2);
+            std::string url_name = content.substr(1, divider2 - 1);
 
-            std::string url = content.substr(divider2 + 2, content.length() - divider2 - 3);
+            std::string url = content.substr(divider2 + 3, content.length() - divider2 - 4);
 
             deque.push_front(url_name, url);
         }
         else if (command == "push_back") {
-            int divider2 = content.find(" ");
-            std::string url_name = content.substr(1, divider2 - 2);
+            int divider2 = content.find("\"", 2);
+            std::string url_name = content.substr(1, divider2 - 1);
 
-            std::string url = content.substr(divider2 + 2, content.length() - divider2 - 3);
+            std::string url = content.substr(divider2 + 3, content.length() - divider2 - 4);
 
             deque.push_back(url_name, url);
         }
@@ -58,7 +58,8 @@ int main()
             deque.clear();
         }
         else if (command == "find") {
-            std::string url_name = content.substr(1, content.length() - 2);
+            int divider2 = content.find("\"", 2);
+            std::string url_name = content.substr(1, divider2 - 1);
             deque.find(url_name);
         }
         else if (command == "print") {
